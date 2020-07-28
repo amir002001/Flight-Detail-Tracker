@@ -4,8 +4,11 @@ using System.Text;
 
 namespace ANCAviationLib
 {
-    interface Fetcher
+    public interface Fetcher<T>
+        where T : Fetcher<T>
     {
-
+        T FetchRawFromApi();
+        T SaveFetch(Uri Directory);
+        T ProcessFetch();
     }
 }
