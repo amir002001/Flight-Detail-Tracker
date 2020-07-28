@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ANCAviationLib
 {
-    abstract class Fetcher
+    interface Fetcher
     {
+
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ANCAviationLib
+namespace ANCAviationLib.COVID
 {
     public class LiveCovidStatusFetcher
     {
