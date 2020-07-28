@@ -154,6 +154,12 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ANCAviationLib\ANCAviationLib.csproj">
+      <Project>{361fd874-8587-4ce1-ab50-a36448550890}</Project>
+      <Name>ANCAviationLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
