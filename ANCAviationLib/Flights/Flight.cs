@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ANCAviationLib.Flights
 {
-    class Airline
+    class Flight
     {
-        public string Name { set; get; }
         public string Iata { set; get; }
+        public string Number { set; get; }
     }
 }

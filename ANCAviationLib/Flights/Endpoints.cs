@@ -4,9 +4,8 @@ using System.Text;
 
 namespace ANCAviationLib.Flights
 {
-    class Airline
+    public enum Endpoints
     {
-        public string Name { set; get; }
-        public string Iata { set; get; }
+        Departure, Arrival
     }
 }
