@@ -6,5 +6,9 @@ namespace ANCAviationLib.COVID
 {
     class LiveCountryCovidStatus
     {
+        internal void AddRegionToList(string value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
