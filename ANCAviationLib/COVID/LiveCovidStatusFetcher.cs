@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace ANCAviationLib.COVID
 {
-
+    
     public class LiveCovidStatusFetcher : Fetcher<LiveCovidStatusFetcher>
     {
         string _today = DateTime.Today.ToString("yyyy-MM-dd");
@@ -38,6 +38,9 @@ namespace ANCAviationLib.COVID
 
         }
 
+        public LiveCountryCovidStatus _liveCountryCovidStatusRepository = new LiveCountryCovidStatus(); 
+        
+
         public string Address
         {
             get
@@ -56,6 +59,15 @@ namespace ANCAviationLib.COVID
             _lastFetchRaw = reader.ReadToEnd();
             return this;
         }
+        public string CountryName
+        {
+            get
+            {
+                string[] splitByQuote = _lastFetchRaw.Split('"');
+                string countryName = splitByQuote[3];
+                return countryName;
+            }
+        }
 
         public LiveCovidStatusFetcher ProcessFetch()
         {
@@ -71,6 +83,11 @@ namespace ANCAviationLib.COVID
             }
             return this;
 
+        }
+        public LiveCovidStatusFetcher ClearRepository()
+        {
+            _liveCountryCovidStatusRepository.Clear();
+            return this;
         }
 
         public LiveCovidStatusFetcher SaveFetch(Uri Directory)
