@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace ANCAviationLib.COVID
 {
     public class LiveCountryCovidStatus
     {
         private List<LiveRegionCovidStatus> _regions = new List<LiveRegionCovidStatus>();
-        enum totals
-        {
-            confirmed,
-            recovered,
-            deaths,
-            actives
-        }
+        
         public Dictionary<totals, int> TotalDailies
         {
             get
