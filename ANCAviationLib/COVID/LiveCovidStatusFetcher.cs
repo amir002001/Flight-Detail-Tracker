@@ -10,9 +10,19 @@ namespace ANCAviationLib.COVID
     
     public class LiveCovidStatusFetcher : Fetcher<LiveCovidStatusFetcher>
     {
-        string _today = DateTime.Today.ToString("yyyy-MM-dd");
-        string _code = "";
-        string _lastFetchRaw;
+        private string _today = DateTime.Today.ToString("yyyy-MM-dd");
+        private string _code = "";
+        private string _lastFetchRaw;
+        private LiveCountryCovidStatus _liveCountryCovidStatusRepository = new LiveCountryCovidStatus();
+        public LiveCountryCovidStatus LiveCountryCovidStatusRepository
+        {
+            get
+            {
+                return _liveCountryCovidStatusRepository;
+            }
+            
+        }
+
         public string Code {
             get
             {
@@ -38,8 +48,6 @@ namespace ANCAviationLib.COVID
 
         }
 
-        public LiveCountryCovidStatus _liveCountryCovidStatusRepository = new LiveCountryCovidStatus(); 
-        
 
         public string Address
         {
