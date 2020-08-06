@@ -62,7 +62,8 @@ namespace ANCAviationLib.COVID
             HttpWebRequest request = HttpWebRequest.CreateHttp(Address);
             request.Headers.Add("x-rapidapi-host", "covid-19-data.p.rapidapi.com");
             request.Headers.Add("x-rapidapi-key", "83f3091260msh62a2c88c3615566p1bbdb8jsn29647eb037fe");
-            Stream stream = request.GetResponse().GetResponseStream();
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
             StreamReader reader = new StreamReader(stream, Encoding.UTF8);
             _lastFetchRaw = reader.ReadToEnd();
             return this;
