@@ -30,6 +30,10 @@ namespace ANCAviationLib.COVID
             }
             set
             {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("Iata code cannot be null or white space");
+                if (value.Trim().Length != 2)
+                    throw new InvalidOperationException("Iata code has to be only two characters");
                 _code = value;
             }
         }
@@ -80,6 +84,8 @@ namespace ANCAviationLib.COVID
 
         public LiveCovidStatusFetcher ProcessFetch()
         {
+            if (_lastFetchRaw.Contains("Country not found"))
+                throw new WebException("Country Not Found");
             string[] open = _lastFetchRaw.Split('[');
             string[] close = open[2].Split(']');
             string provincies = close[0];
