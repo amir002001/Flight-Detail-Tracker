@@ -122,8 +122,8 @@
     <Compile Include="CovidStatusPage.xaml.cs">
       <DependentUpon>CovidStatusPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="FlightStatusPage.xaml.cs">
+      <DependentUpon>FlightStatusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeatherStatusPage.xaml.cs">
@@ -154,9 +154,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="FlightStatusPage.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WeatherStatusPage.xaml">
       <SubType>Designer</SubType>
