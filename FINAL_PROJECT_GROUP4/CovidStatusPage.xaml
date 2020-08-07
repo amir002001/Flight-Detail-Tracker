@@ -8,8 +8,22 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
+    <Grid>
+        <TextBlock Text="COVID-19 LIVE DAILY STATUS" TextWrapping="Wrap" Height="141" Width="1127" FontSize="80" FontWeight="Bold" Margin="180,34,193,825" />
+        <TextBlock HorizontalAlignment="Left" Margin="32,302,0,0" Text="Confirmed Cases :- " TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65"/>
+        <TextBlock HorizontalAlignment="Left" Margin="31,437,0,0" Text="Recovered :- " TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,582,0,0" Text="Deaths :- " TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65"/>
+        <TextBlock HorizontalAlignment="Left" Margin="33,717,0,0" Text="Active Cases :- " TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65"/>
+        <TextBlock HorizontalAlignment="Left" Margin="32,168,0,0" Text="Country :- " TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65" RenderTransformOrigin="0.464,0.446"/>
+        <Button Content="Back" Margin="895,884,0,0" VerticalAlignment="Top" Height="75" Width="202" CornerRadius="10" FontSize="40" Background="Gray"/>
+        <Button Content="Save" Margin="1160,880,0,0" VerticalAlignment="Top" Height="75" Width="202" CornerRadius="10" FontSize="40" Background="Gray"/>
+        <TextBox HorizontalAlignment="Left" Margin="757,159,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65" RenderTransformOrigin="0.472,0.5"/>
+        <TextBox HorizontalAlignment="Left" Margin="757,300,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65" RenderTransformOrigin="0.472,0.5"/>
+        <TextBox HorizontalAlignment="Left" Margin="757,435,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65" RenderTransformOrigin="0.472,0.5"/>
+        <TextBox HorizontalAlignment="Left" Margin="757,579,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65" RenderTransformOrigin="0.472,0.5"/>
+        <TextBox HorizontalAlignment="Left" Margin="757,726,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="121" Width="642" FontSize="65" RenderTransformOrigin="0.472,0.5"/>
 
-        
-    </StackPanel>
+
+
+    </Grid>
 </Page>
