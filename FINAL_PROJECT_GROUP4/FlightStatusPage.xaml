@@ -1,0 +1,206 @@
+﻿<Page
+    x:Class="FINAL_PROJECT_GROUP4.FlightStatusPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FINAL_PROJECT_GROUP4"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:FlightLib="using:ANCAviationLib.Flights"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="PlaceHolder"></Style>
+        <Style TargetType="TextBlock" x:Key="TitleStyle" BasedOn="{StaticResource HeaderTextBlockStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Button" x:Name="ButtonStyle">
+            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="MinWidth" Value="100"></Setter>
+            <Setter Property="Margin" Value="40,0,20,0"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="500"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="3" Text="Flight Finder" Style="{StaticResource TitleStyle}"></TextBlock>
+        <Grid Grid.Row="1" x:Name="FiltersGrid">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                    <Setter Property="Margin" Value="20"></Setter>
+                    <Setter Property="FontSize" Value="25"></Setter>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="FontSize" Value="25"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Flight Number:"></TextBlock>
+            <TextBlock Text="Airline IATA:" Grid.Row="1"></TextBlock>
+            <TextBlock Text="Departure Airport IATA:" Grid.Row="2"></TextBlock>
+            <TextBlock Text="Arrival Airport IATA:" Grid.Row="3"></TextBlock>
+
+            <TextBox x:Name="TxtBoxFlightNo" Grid.Column="1" Grid.Row="0" Text="{x:Bind FlightNumberFilter, Mode=TwoWay}"></TextBox>
+            <TextBox x:Name="TxtBoxAirlineIata" Grid.Column="1" Grid.Row="1" Text="{x:Bind AirlineIataFilter, Mode=TwoWay}"></TextBox>
+            <TextBox x:Name="TxtBoxDptIata" Grid.Column="1" Grid.Row="2" Text="{x:Bind DepartureIataFilter, Mode=TwoWay}"></TextBox>
+            <TextBox x:Name="TxtBoxArrIata" Grid.Column="1" Grid.Row="3" Text="{x:Bind ArrivalIataFilter, Mode=TwoWay}"></TextBox>
+        </Grid>
+
+
+
+        <ListView x:Name="LstFlights" Grid.Column="1" Grid.Row="1" Background="LightGray" Margin="20,0" ItemsSource="{x:Bind _flightFetcher.FlightCollection, Mode=OneWay}" SelectionChanged="DisplayDetailsOnSelectionChanged" SelectedItem="{x:Bind _selectedFlight, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="FlightLib:FlightDetails">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="2,0"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </StackPanel.Resources>
+                        <Image Source="{x:Bind Airline.IconPath}" Margin="0,0,20,0"></Image>
+                        <TextBlock Text="{x:Bind Departure.Iata}"></TextBlock>
+                        <TextBlock Text="-"></TextBlock>
+                        <TextBlock Text="{x:Bind Arrival.Iata}"></TextBlock>
+                        <TextBlock Text="{x:Bind Airline.Iata}"></TextBlock>
+                        <TextBlock Text="{x:Bind Flight.Number}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid x:Name="TxtDetails" Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center" Background="AliceBlue">
+                <Image x:Name="ImgDpt"  Width="256" Margin="20,10" Height="128"></Image>
+                <TextBlock VerticalAlignment="Center" FontWeight="Bold">TO</TextBlock>
+                <Image x:Name="ImgArr" Width="256" Margin="20,10" Height="128" Grid.Column="1"></Image>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Background="AliceBlue" Orientation="Vertical">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+                        <Setter Property="FontSize" Value="16"></Setter>
+                        
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin" Value="20,20,0,0"></Setter>
+                    </Style>
+                    <Style x:Key="IndentedStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}">
+                        <Setter Property="Margin" Value="20,0,0,0"></Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Flight Number:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockFNoDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Airline:" FontWeight="SemiBold"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Name:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockAirlnNameDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Airline IATA:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockAirlnIataDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Departure Details:" FontWeight="SemiBold"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Airport Name:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockDptAirportDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Airport IATA:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockDptIataDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Scheduled Time:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBLockDptTimeDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource TextBlockStyle}" Text="Arrival Details:" FontWeight="SemiBold"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Airport Name:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockArrAirportDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Airport IATA:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockArrIataDetails"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource IndentedStyle}" Text="Scheduled Time:"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockArrTimeDetails"></TextBlock>
+                </StackPanel>
+                
+            </StackPanel>
+            
+
+        </Grid>
+
+
+        <Grid Grid.Row="2" x:Name="LeftButtonsGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Content="Search" Style="{StaticResource ButtonStyle}" Click="SearchOnClick"></Button>
+            <Button Content="Clear" Grid.Column="1" Style="{StaticResource ButtonStyle}" Click="ClearOnClick"></Button>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="RightButtonsGrid" HorizontalAlignment="Right">
+            <Grid.Resources>
+                <Style TargetType="RadioButton">
+                    <Setter Property="FontSize" Value="15"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <RadioButton x:Name="DepartureButton" Content="Departure" GroupName="Radios" IsChecked="True"></RadioButton>
+            <RadioButton x:Name="ArrivalButton" Grid.Row="1" Content="Arrival" GroupName="Radios"></RadioButton>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Content="Weather Status" MinWidth="187" HorizontalAlignment="Left" Click="NavigateToWeatherOnClick"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="1" Content="COVID-19 Status" MinWidth="204" HorizontalAlignment="Left" Click="NavigateToCovidOnClick"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.RowSpan="2" Grid.Column="2" Content="Save Flight" MinWidth="140" HorizontalAlignment="Left" Click="SaveOnClick"></Button>
+        </Grid>
+    </Grid>
+</Page>
