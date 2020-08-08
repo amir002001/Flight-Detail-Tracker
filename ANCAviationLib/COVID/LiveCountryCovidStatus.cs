@@ -6,5 +6,6 @@ namespace ANCAviationLib.COVID
 {
     class LiveCountryCovidStatus
     {
+
     }
 }

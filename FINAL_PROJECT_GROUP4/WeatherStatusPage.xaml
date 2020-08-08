@@ -8,7 +8,102 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="PlaceHolder"></Style>
+        <Style TargetType="TextBlock" x:Key="TitleStyle" BasedOn="{StaticResource HeaderTextBlockStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Button" x:Name="ButtonStyle">
+            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="MinWidth" Value="100"></Setter>
+            <Setter Property="Margin" Value="40,0,20,0"></Setter>
+        </Style>
+    </Page.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="500"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="7*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.ColumnSpan="3" Text="WEATHER FORECAST" Style="{StaticResource TitleStyle}"></TextBlock>
+        <Grid Grid.Row="1" x:Name="FiltersGrid" Margin="129,0,338,166" Grid.RowSpan="2">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                    <Setter Property="Margin" Value="20"></Setter>
+                    <Setter Property="FontSize" Value="25"></Setter>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="FontSize" Value="25"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Temp (Celsius):"    Margin="25,0,0,0"  Width="164" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+            <TextBlock Text="Temp (Fahrenhiet):" Margin="25,109,0,0"  Width="164" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+            <TextBlock Text="Humidity:"          Margin="25,34,0,0"  Width="164" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <TextBlock Text="Windspeed(KPH):"    Margin="25,98,0,0"  Width="195" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1" Height="37" Grid.RowSpan="2"/>
+            <TextBlock Text="Weather:"           Margin="25,24,0,0"  Width="164" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <TextBlock Text="Sunrise(ISO):"      Margin="25,85,0,0"  Width="164" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <TextBlock Text="Sunset(ISO):"       Margin="25,12,0,0"  Width="164" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="3"/>
+            <TextBlock Text="Pressure:"          Margin="25,74,0,0"  Width="164" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="3"/>
+            <TextBox Margin="221,45,-420,0"  Grid.ColumnSpan="2" Grid.RowSpan="1" VerticalAlignment="Top" />
+            <TextBox Margin="221,105,-420,0" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Top"/>
+            <TextBox Margin="221,165,-420,0" Grid.ColumnSpan="2" Grid.RowSpan="3" VerticalAlignment="Top"/>
+            <TextBox Margin="221,225,-420,0" Grid.ColumnSpan="2" Grid.RowSpan="4" VerticalAlignment="Top"/>
+            <TextBox Margin="221,285,-420,0" Grid.ColumnSpan="2" Grid.RowSpan="5" VerticalAlignment="Top"/>
+            <TextBox Margin="221,345,-420,0" Grid.ColumnSpan="2" Grid.RowSpan="6" VerticalAlignment="Top"/>
+            <TextBox Margin="221,405,-420,0" Grid.ColumnSpan="2" Grid.RowSpan="7" VerticalAlignment="Top"/>
+            <TextBox Margin="221,465,-420,0" Grid.ColumnSpan="2" Grid.RowSpan="8" VerticalAlignment="Top"/>
+        </Grid>
+
+
+        <Grid Grid.Row="2" x:Name="LeftButtonsGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="2" x:Name="RightButtonsGrid" HorizontalAlignment="Right">
+            <Grid.Resources>
+                <Style TargetType="RadioButton">
+                    <Setter Property="FontSize" Value="15"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Content="Back" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="2" Content="Save" HorizontalAlignment="Left" Margin="-391,20,0,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Page>

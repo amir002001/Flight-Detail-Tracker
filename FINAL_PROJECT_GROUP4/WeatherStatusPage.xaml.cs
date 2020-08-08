@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using ANCAviationLib.Flights;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -25,6 +26,17 @@ namespace FINAL_PROJECT_GROUP4
         public WeatherStatusPage()
         {
             this.InitializeComponent();
+        }
+
+        private FlightFetcher LFetcher = new FlightFetcher();
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            object FlightFetcher = base.OnNavigatedFrom(e);
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
