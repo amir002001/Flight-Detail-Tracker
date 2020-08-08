@@ -8,7 +8,6 @@ namespace ANCAviationLib
         where T : Fetcher<T>
     {
         T FetchRawFromApi();
-        T SaveFetch(Uri Directory);
         T ProcessFetch();
     }
 }

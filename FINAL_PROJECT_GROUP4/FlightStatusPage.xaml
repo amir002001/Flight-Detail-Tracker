@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    NavigationCacheMode="Required"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <Style TargetType="TextBlock" x:Key="PlaceHolder"></Style>
@@ -63,18 +64,19 @@
             <TextBlock Text="Airline IATA:" Grid.Row="2"></TextBlock>
             <TextBlock Text="Departure Airport IATA:" Grid.Row="3"></TextBlock>
             <TextBlock Text="Arrival Airport IATA:" Grid.Row="4"></TextBlock>
-            <TextBox Grid.Column="1" Grid.Row="0"></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="1"></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="2"></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="3"></TextBox>
-            <TextBox Grid.Column="1" Grid.Row="4"></TextBox>
+
+            <TextBox x:Name="TxtBoxFlightNo" Grid.Column="1" Grid.Row="0" Text="{x:Bind FlightNumberFilter, Mode=OneWay}"></TextBox>
+            <DatePicker x:Name="DatePckrFlightDate" Grid.Column="1" Grid.Row="1" SelectedDate="{x:Bind FlightDateFilter, Mode=OneWay}"></DatePicker>
+            <TextBox x:Name="TxtBoxAirlineIata" Grid.Column="1" Grid.Row="2" Text="{x:Bind AirlineIataFilter, Mode=OneWay}"></TextBox>
+            <TextBox x:Name="TxtBoxDptIata" Grid.Column="1" Grid.Row="3" Text="{x:Bind DepartureIataFilter, Mode=OneWay}"></TextBox>
+            <TextBox x:Name="TxtBoxArrIata" Grid.Column="1" Grid.Row="4" Text="{x:Bind ArrivalIataFilter, Mode=OneWay}"></TextBox>
         </Grid>
-        
-        
 
-        <ListView Grid.Column="1" Grid.Row="1" Background="AliceBlue" Margin="20"></ListView>
 
-        <TextBlock Grid.Row="1" Grid.Column="2" FontSize="200" Text="Lorem&#10;Ipsum"></TextBlock>
+
+        <ListView x:Name="LstFlights" Grid.Column="1" Grid.Row="1" Background="AliceBlue" Margin="20" ItemsSource="{x:Bind _flightFetcher.FlightCollection, Mode=OneWay}"></ListView>
+
+        <TextBlock x:Name="TxtDetails" Grid.Row="1" Grid.Column="2" FontSize="15" Text="Lorem&#10;Ipsum"></TextBlock>
 
 
         <Grid Grid.Row="2" x:Name="LeftButtonsGrid">
@@ -82,11 +84,11 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Content="Search" Style="{StaticResource ButtonStyle}"></Button>
-            <Button Content="Clear" Grid.Column="1" Style="{StaticResource ButtonStyle}"></Button>
+            <Button Content="Search" Style="{StaticResource ButtonStyle}" Click="SearchOnClick"></Button>
+            <Button Content="Clear" Grid.Column="1" Style="{StaticResource ButtonStyle}" Click="ClearOnClick"></Button>
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="2" x:Name="RightButtonsGrid" HorizontalAlignment="Right">
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="RightButtonsGrid" HorizontalAlignment="Right">
             <Grid.Resources>
                 <Style TargetType="RadioButton">
                     <Setter Property="FontSize" Value="15"></Setter>
@@ -104,9 +106,9 @@
             </Grid.RowDefinitions>
             <RadioButton x:Name="DepartureButton" Content="Departure"></RadioButton>
             <RadioButton x:Name="ArrivalButton" Grid.Row="1" Content="Arrival"></RadioButton>
-            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Content="Weather Status"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="1" Content="COVID-19 Status"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Grid.RowSpan="2" Grid.Column="2" Content="Save Flight"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Content="Weather Status" MinWidth="187" HorizontalAlignment="Left" Click="NavigateToWeatherOnClick"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="1" Content="COVID-19 Status" MinWidth="204" HorizontalAlignment="Left" Click="NavigateToCovidOnClick"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.RowSpan="2" Grid.Column="2" Content="Save Flight" MinWidth="140" HorizontalAlignment="Left" Click="SaveOnClick"></Button>
         </Grid>
     </Grid>
 </Page>

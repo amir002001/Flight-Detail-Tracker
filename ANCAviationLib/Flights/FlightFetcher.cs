@@ -1,6 +1,7 @@
 ﻿using ANCAviationLib.COVID;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Net;
@@ -13,21 +14,26 @@ namespace ANCAviationLib.Flights
     public class FlightFetcher : Fetcher<FlightFetcher>
     {
         private Dictionary<string, string> _filters = new Dictionary<string, string>();
-        public FlightDetailRepository _flightDetailRepo = new FlightDetailRepository();
-        private string _accessKey = "89553d518f272e5652d22808fdee046c";
-        public string LastFetchRaw { get; private set; }
+        private FlightDetailRepository _flightRepo = new FlightDetailRepository();
+        private const string _defaultAccessKey = "89553d518f272e5652d22808fdee046c";
+        private string _accessKey = _defaultAccessKey;
+        private string LastFetchRaw { get; set; }
         public string AccessKey
         {
             set
             {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new InvalidOperationException("Access Key can't be empty");
                 _accessKey = value;
             }
+        }
+        public ObservableCollection<FlightDetails> FlightCollection
+        {
             get
             {
-                return _accessKey;
-            }
+                return _flightRepo._flightDetailRepo;            }
         }
-        public string Address
+        private string Address
         {
             get
             {
@@ -39,18 +45,29 @@ namespace ANCAviationLib.Flights
                 return returnString;
             }
         }
+        public FlightFetcher RevertToDefaultAccessKey()
+        {
+            AccessKey = _defaultAccessKey;
+            return this;
+        }
         public FlightFetcher FilterByFlightNumber(string flightNumber)
         {
+            if (string.IsNullOrWhiteSpace(flightNumber))
+                return this;
             _filters.Add("flight_number", flightNumber);
             return this;
         }
         public FlightFetcher FilterByAirlineIata(string airlineIata)
         {
+            if (string.IsNullOrWhiteSpace(airlineIata))
+                return this;
             _filters.Add("airline_iata", airlineIata);
             return this;
         }
-        public FlightFetcher FilterByEndpointIATA(Endpoints endPoint, string endpointIata)
+        public FlightFetcher FilterByEndpointIata(Endpoints endPoint, string endpointIata)
         {
+            if (string.IsNullOrWhiteSpace(endpointIata))
+                return this;
             switch (endPoint)
             {
                 case Endpoints.Arrival:
@@ -62,17 +79,34 @@ namespace ANCAviationLib.Flights
             }
             return this;
         }
-        public FlightFetcher FilterByFlightDate(DateTime date)
+        public FlightFetcher FilterByFlightDate(DateTime? date)
         {
-            _filters.Add("flight_date", date.ToString("yyyy-MM-dd"));
+            if (date == null)
+            {
+                return this;
+            }
+            _filters.Add("flight_date", date?.ToString("yyyy-MM-dd"));
             return this;
         }
         public FlightFetcher FetchRawFromApi()
         {
             HttpWebRequest request = HttpWebRequest.CreateHttp(Address);
-            Stream responseStream = request.GetResponse().GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-            LastFetchRaw = reader.ReadToEnd();
+            try
+            {
+                using (StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream(), Encoding.UTF8))
+                {
+                    LastFetchRaw = reader.ReadToEnd();
+                }
+            }
+            catch(WebException ex)
+            {
+                if (ex.Message.Contains("401"))
+                {
+                    AccessKey = _defaultAccessKey;
+                    throw new WebException("Key was invalid. Reverting to default key");
+                }
+                throw ex;
+            }
             return this;
         }
         public FlightFetcher ProcessFetch()
@@ -83,13 +117,9 @@ namespace ANCAviationLib.Flights
 
             foreach (Match match in MatchFinder(jsonString))
             {
-                _flightDetailRepo.Add(match.Value);
+                _flightRepo.Add(match.Value);
             }
             return this;
-        }
-        public FlightFetcher SaveFetch(Uri directory)
-        {
-            throw new NotImplementedException();
         }
         private MatchCollection MatchFinder(string jsonString)
         {
@@ -98,14 +128,11 @@ namespace ANCAviationLib.Flights
             MatchCollection matches = Regex.Matches(jsonString, pattern);
             return matches;
         }
-        public FlightFetcher ClearFilters()
+        public FlightFetcher ClearFetcher()
         {
+            _flightRepo.Clear();
             _filters.Clear();
-            return this;
-        }
-        public FlightFetcher ClearRepository()
-        {
-            _flightDetailRepo.Clear();
+            LastFetchRaw = "";
             return this;
         }
     }
