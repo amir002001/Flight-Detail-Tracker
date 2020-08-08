@@ -17,7 +17,7 @@ namespace ANCAviationLib.Flights
         [DataMember]
         public Endpoint Arrival { set; get; }
         [DataMember]
-        public Dictionary<string, string> Airline { set; get; }
+        public Airline Airline { set; get; }
         [DataMember]
         public Flight Flight { set; get; }
     }
