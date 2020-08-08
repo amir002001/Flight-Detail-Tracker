@@ -108,14 +108,14 @@ namespace FINAL_PROJECT_GROUP4
         {
 
             TxtBlockFNoDetails.Text = _selectedFlight.Flight.Number;
-            TxtBlockAirlnNameDetails.Text = _selectedFlight.Airline.Name;
-            TxtBlockAirlnIataDetails.Text = _selectedFlight.Airline.Name;
-            TxtBlockDptAirportDetails.Text = _selectedFlight.Departure.Airport;
-            TxtBlockDptIataDetails.Text = _selectedFlight.Departure.Iata;
-            TxtBLockDptTimeDetails.Text = _selectedFlight.Departure.Scheduled;
-            TxtBlockArrAirportDetails.Text = _selectedFlight.Arrival.Airport;
-            TxtBlockArrIataDetails.Text = _selectedFlight.Arrival.Iata;
-            TxtBlockArrTimeDetails.Text = _selectedFlight.Arrival.Scheduled;
+            TxtBlockAirlnNameDetails.Text = _selectedFlight.Airline.Name ?? "";
+            TxtBlockAirlnIataDetails.Text = _selectedFlight.Airline.Iata ?? "";
+            TxtBlockDptAirportDetails.Text = _selectedFlight.Departure.Airport ?? "";
+            TxtBlockDptIataDetails.Text = _selectedFlight.Departure.Iata ?? "";
+            TxtBLockDptTimeDetails.Text = _selectedFlight.Departure.Scheduled ?? "";
+            TxtBlockArrAirportDetails.Text = _selectedFlight.Arrival.Airport ?? "";
+            TxtBlockArrIataDetails.Text = _selectedFlight.Arrival.Iata ?? "";
+            TxtBlockArrTimeDetails.Text = _selectedFlight.Arrival.Scheduled ?? "";
         }
         private void ClearDetails()
         {
