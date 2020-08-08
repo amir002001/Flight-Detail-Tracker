@@ -10,13 +10,13 @@ namespace ANCAviationLib.DataAccessLayer
 {
     public static class JsonSaver
     {
-        public static void Save<T>(string path, T toBeSaved)
+        public static void Save<T>(Stream stream, T toBeSaved)
         {
-            using (FileStream fileStream = new FileStream(path, FileMode.Create))
+            using (stream)
             {
                 DataContractJsonSerializer jsonSerializer =
                     new DataContractJsonSerializer(typeof(T));
-                jsonSerializer.WriteObject(fileStream, toBeSaved);
+                jsonSerializer.WriteObject(stream, toBeSaved);
             }
         }
     }

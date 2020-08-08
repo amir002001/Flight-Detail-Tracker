@@ -1,8 +1,10 @@
 ﻿using ANCAviationLib.COVID;
+using ANCAviationLib.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -79,15 +81,7 @@ namespace ANCAviationLib.Flights
             }
             return this;
         }
-        public FlightFetcher FilterByFlightDate(DateTime? date)
-        {
-            if (date == null)
-            {
-                return this;
-            }
-            _filters.Add("flight_date", date?.ToString("yyyy-MM-dd"));
-            return this;
-        }
+        
         public FlightFetcher FetchRawFromApi()
         {
             HttpWebRequest request = HttpWebRequest.CreateHttp(Address);
@@ -114,7 +108,7 @@ namespace ANCAviationLib.Flights
             string[] jsonStringSplit = LastFetchRaw.Split('[');
             jsonStringSplit = jsonStringSplit[1].Split(']');
             string jsonString = jsonStringSplit[0];
-
+            
             foreach (Match match in MatchFinder(jsonString))
             {
                 _flightRepo.Add(match.Value);
@@ -123,8 +117,8 @@ namespace ANCAviationLib.Flights
         }
         private MatchCollection MatchFinder(string jsonString)
         {
-            const string pattern = @"[{].+?[{].+?[}].+?[{].+?[}].+?[{].+?[}].+?[{].+?[}].+?[}]";
-
+            //const string pattern = @"[{].+?[{].+?[}].+?[{].+?[}].+?[{].+?[}].+?[{].+?[}].+?[}]+?";
+            const string pattern = "[{].+?\"live\":.+?[}]+";
             MatchCollection matches = Regex.Matches(jsonString, pattern);
             return matches;
         }

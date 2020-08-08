@@ -18,5 +18,7 @@ namespace ANCAviationLib.Airports
         public double Latitude { set; get; }
         [DataMember]
         public double Longitude { set; get; }
+        [DataMember]
+        public string Country_Iso { set; get; }
     }
 }

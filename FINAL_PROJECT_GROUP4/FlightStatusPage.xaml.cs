@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using ANCAviationLib.DataAccessLayer;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,11 +30,11 @@ namespace FINAL_PROJECT_GROUP4
     public sealed partial class FlightStatusPage : Page
     {
         private string FlightNumberFilter { set; get; }
-        private DateTime? FlightDateFilter { get; set; }
         private string AirlineIataFilter { get; set; }
         private string DepartureIataFilter { set; get; }
         private string ArrivalIataFilter { set; get; }
         private FlightFetcher _flightFetcher = new FlightFetcher();
+        private AirportFetcher _airportFetcher = new AirportFetcher();
         public FlightStatusPage()
         {
             this.InitializeComponent();
@@ -41,11 +42,11 @@ namespace FINAL_PROJECT_GROUP4
 
         private void SearchOnClick(object sender, RoutedEventArgs e)
         {
+
             _flightFetcher.ClearFetcher()
                 .FilterByAirlineIata(AirlineIataFilter)
                 .FilterByEndpointIata(Endpoints.Arrival, ArrivalIataFilter)
                 .FilterByEndpointIata(Endpoints.Departure, DepartureIataFilter)
-                .FilterByFlightDate(FlightDateFilter)
                 .FilterByFlightNumber(FlightNumberFilter)
                 .FetchRawFromApi().ProcessFetch();
         }
@@ -56,22 +57,21 @@ namespace FINAL_PROJECT_GROUP4
             TxtBoxDptIata.Text = "";
             TxtBoxFlightNo.Text = "";
             TxtBoxAirlineIata.Text = "";
-            DatePckrFlightDate.SelectedDate = null;
         }
 
         private void NavigateToWeatherOnClick(object sender, RoutedEventArgs e)
         {
-            AirportFetcher fetcher = new AirportFetcher();
-            fetcher.Code = ((FlightDetails)LstFlights.SelectedItem).Arrival.Iata;
-            fetcher.FetchRawFromApi().ProcessFetch();
-            var lon = fetcher.FetchedAirport.Longitude;
-            var lat = fetcher.FetchedAirport.Latitude;
+            _airportFetcher.Code = ((FlightDetails)LstFlights.SelectedItem).Arrival.Iata;
+            _airportFetcher.FetchRawFromApi().ProcessFetch();
+            var lon = _airportFetcher.FetchedAirport.Longitude;
+            var lat = _airportFetcher.FetchedAirport.Latitude;
             Frame.Navigate(typeof(WeatherStatusPage), new double[] { lat, lon });
         }
 
         private void NavigateToCovidOnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CovidStatusPage), ((FlightDetails)LstFlights.SelectedItem).Departure.Iata);
+            _airportFetcher.Code = ((FlightDetails)LstFlights.SelectedItem).Departure.Iata;
+            Frame.Navigate(typeof(CovidStatusPage), _airportFetcher.FetchedAirport.Country_Iso);
         }
 
         private async void SaveOnClick(object sender, RoutedEventArgs e)
@@ -81,7 +81,21 @@ namespace FINAL_PROJECT_GROUP4
             savePicker.FileTypeChoices.Add("Json", new List<String> { ".json" });
             savePicker.SuggestedFileName = "SavedFlight.json";
             StorageFile storageFile = await savePicker.PickSaveFileAsync();
-            JsonSaver.Save<FlightDetails>(storageFile.Path, (FlightDetails)LstFlights.SelectedItem);
+            
+            JsonSaver.Save<FlightDetails>(await storageFile.OpenStreamForWriteAsync(), (FlightDetails)LstFlights.SelectedItem);
         }
+
+        private void DisplayDetailsOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LstFlights.SelectedItem == null)
+                return;
+            _airportFetcher.Code = ((FlightDetails)LstFlights.SelectedItem).Departure.Iata;
+            _airportFetcher.FetchRawFromApi().ProcessFetch();
+            ImgDpt.Source = new BitmapImage(new Uri(GetFlagPath(_airportFetcher.FetchedAirport.Country_Iso)));
+            _airportFetcher.Code = ((FlightDetails)LstFlights.SelectedItem).Arrival.Iata;
+            _airportFetcher.FetchRawFromApi().ProcessFetch();
+            ImgArr.Source = new BitmapImage(new Uri(GetFlagPath(_airportFetcher.FetchedAirport.Country_Iso)));
+        }
+        private string GetFlagPath(string countryIso) => $"ms-appx:///Assets/Flags/{countryIso}.png";
     }
 }
