@@ -103,7 +103,8 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Button Content="Back" Style="{StaticResource ButtonStyle}"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Grid.Column="2" Content="Save" HorizontalAlignment="Left" Margin="-391,20,0,0" VerticalAlignment="Top"/>
+            <Button Style="{StaticResource ButtonStyle}" Grid.Column="2" Content="Save" HorizontalAlignment="Left" Margin="-391,20,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         </Grid>
+        <Image Grid.Column="2" HorizontalAlignment="Left" Height="264" Margin="26,14,0,0" Grid.Row="1" VerticalAlignment="Top" Width="415" Source="Assets/WeatherForecast.png"/>
     </Grid>
 </Page>

@@ -34,7 +34,7 @@ namespace FINAL_PROJECT_GROUP4
             object FlightFetcher = base.OnNavigatedFrom(e);
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }

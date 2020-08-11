@@ -7,8 +7,9 @@ namespace ANCAviationLib
     public interface Fetcher<T>
         where T : Fetcher<T>
     {
-        T FetchRawFromApi();
+        T FetchRawFromApi { get; }
+
         T SaveFetch(Uri Directory);
-        T ProcessFetch();
+        T ProcessFetch { get; }
     }
 }
