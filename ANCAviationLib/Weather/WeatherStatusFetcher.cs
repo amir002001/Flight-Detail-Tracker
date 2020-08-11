@@ -13,7 +13,18 @@ namespace ANCAviationLib.Weather
  
         private string _today = DateTime.Today.ToString("yyyy-MM-dd");
         private string _code = "";
-        private string _lastFetchRaw { get; private set; }
+        private object lastFetchRaw;
+
+        private string GetLastFetchRaw()
+        {
+            return lastFetchRaw;
+        }
+
+        private void SetLastFetchRaw(string value)
+        {
+            lastFetchRaw = value;
+        }
+
         private WeatherStatus _weatherStatus = new WeatherStatus();
         public WeatherStatus WeatherStatusRepository
         {
@@ -60,7 +71,7 @@ namespace ANCAviationLib.Weather
         {
             get
             {
-                string[] jsonStringSplit = LastFetchRaw.Split('[');
+                string[] jsonStringSplit = GetLastFetchRaw().Split('[');
                 jsonStringSplit = jsonStringSplit[1].Split(']');
                 string jsonString = jsonStringSplit[0];
             }
@@ -93,7 +104,5 @@ namespace ANCAviationLib.Weather
         {
             throw new NotImplementedException();
         }
-    }
-
     }
 }

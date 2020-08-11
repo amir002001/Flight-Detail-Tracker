@@ -28,7 +28,6 @@ namespace FINAL_PROJECT_GROUP4
             this.InitializeComponent();
         }
 
-        private FlightFetcher LFetcher = new FlightFetcher();
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             object FlightFetcher = base.OnNavigatedFrom(e);
