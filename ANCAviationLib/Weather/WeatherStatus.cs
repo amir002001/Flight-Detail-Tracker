@@ -8,7 +8,6 @@ namespace ANCAviationLib.Weather
 {
     public class WeatherStatus
     {
-        private List<WeatherStatus> _data = new List<WeatherStatus>();
         public int TempC { get; set; }
         public int TempF { get; set; }
         public int Humidity { get; set; }
@@ -22,15 +21,5 @@ namespace ANCAviationLib.Weather
         {
             _data.Clear();
         }
-
-        public void AdddataToList(string value)
-        {
-            DataContractJsonSerializer options = new DataContractJsonSerializer
-            {
-                PropertyNameCaseInsensitive = true;
-        };
-        }
-    }
-
-   
+    } 
 }
