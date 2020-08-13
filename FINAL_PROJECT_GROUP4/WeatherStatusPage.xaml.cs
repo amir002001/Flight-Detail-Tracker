@@ -33,9 +33,9 @@ namespace FINAL_PROJECT_GROUP4
             object FlightFetcher = base.OnNavigatedFrom(e);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Clear(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }
