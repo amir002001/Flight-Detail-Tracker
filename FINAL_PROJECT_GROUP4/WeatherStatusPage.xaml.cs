@@ -56,7 +56,7 @@ namespace FINAL_PROJECT_GROUP4
         }
         private void Back_Button(object sender, RoutedEventArgs e)
         {
-
+            this.Frame.Navigate(typeof(FlightStatusPage));
         }
     }
 }
