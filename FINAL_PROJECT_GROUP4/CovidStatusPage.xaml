@@ -7,8 +7,81 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="PlaceHolder"></Style>
+        <Style TargetType="TextBlock" x:Key="TitleStyle" BasedOn="{StaticResource HeaderTextBlockStyle}">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="Button" x:Name="ButtonStyle">
+            <Setter Property="FontSize" Value="25"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="MinWidth" Value="100"></Setter>
+            <Setter Property="Margin" Value="40,0,20,0"></Setter>
+        </Style>
+    </Page.Resources>
+
+
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
+        <TextBlock Text="COVID-19 LIVE DAILY STATUS" Style="{StaticResource TitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="107" Width="1038" FontSize="70" RenderTransformOrigin="0.452,0.471" FontWeight="Bold"/>
+        <Grid Grid.Row="1" x:Name="DetailGrid" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" >
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                    <Setter Property="Margin" Value="20"></Setter>
+                    <Setter Property="FontSize" Value="25"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="COUNTRY:" Grid.Row="0" FontSize="45" HorizontalAlignment="Right"></TextBlock>
+            <TextBlock Text="CONFIRMED CASES:" Grid.Row="1" FontSize="45" HorizontalAlignment="Right"></TextBlock>
+            <TextBlock Text="RECOVERED:" Grid.Row="2" FontSize="45" HorizontalAlignment="Right"></TextBlock>
+            <TextBlock Text="DEATHS" Grid.Row="3" FontSize="45" HorizontalAlignment="Right"></TextBlock>
+            <TextBlock Text="ACTIVE CASES:" Grid.Row="4" FontSize="45" HorizontalAlignment="Right"></TextBlock>
+
+            <TextBlock Text="" x:Name="CountryTxt" Grid.Column="1" Grid.Row="0" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="ConfirmedCasesTxt" Grid.Column="1" Grid.Row="1" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="RecoveredTxt" Grid.Column="1" Grid.Row="2" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="DeathTxt" Grid.Column="1" Grid.Row="3" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="ActiveCasesTxt" Grid.Column="1" Grid.Row="4" FontSize="45"></TextBlock>
+
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1" x:Name="Grid" HorizontalAlignment="Center"  Width="795">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Button Style="{StaticResource ButtonStyle}" Grid.RowSpan="1" Content="BACK" RenderTransformOrigin="0.66,-0.106"></Button>
+            <Button Style="{StaticResource ButtonStyle}" Grid.RowSpan="1" Grid.Column="1" Content="SAVE"></Button>
+
+        </Grid>
     </Grid>
+
 </Page>

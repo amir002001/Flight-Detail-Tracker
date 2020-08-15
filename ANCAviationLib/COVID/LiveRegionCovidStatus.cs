@@ -4,7 +4,11 @@ using System.Text;
 
 namespace ANCAviationLib.COVID
 {
-    class LiveRegionCovidStatus
+    public class LiveRegionCovidStatus
     {
+        public int Confirmed { get; set; }
+        public int Recovered { get; set; }
+        public int Deaths { get; set; }
+        public int Actives { get; set; }
     }
 }
