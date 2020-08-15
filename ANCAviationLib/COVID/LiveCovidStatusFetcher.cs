@@ -38,7 +38,7 @@ namespace ANCAviationLib.COVID
             }
         }
 
-        LiveCountryCovidStatus _lastFetchParsed;
+        LiveCountryCovidStatus _lastFetchParsed ;
         LiveCountryCovidStatus Fetch
         {
             get
@@ -91,6 +91,7 @@ namespace ANCAviationLib.COVID
             string provincies = close[0];
             string pattern = @"[{].+?[}]";
             MatchCollection matches = Regex.Matches(provincies, pattern);
+            Fetch = new LiveCountryCovidStatus();
             foreach (Match match in matches)
             {
                 Fetch.AddRegionToList(match.Value);

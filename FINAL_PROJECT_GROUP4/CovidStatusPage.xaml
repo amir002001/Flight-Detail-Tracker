@@ -60,11 +60,11 @@
             <TextBlock Text="DEATHS" Grid.Row="3" FontSize="45" HorizontalAlignment="Right"></TextBlock>
             <TextBlock Text="ACTIVE CASES:" Grid.Row="4" FontSize="45" HorizontalAlignment="Right"></TextBlock>
 
-            <TextBlock Text="" Grid.Column="1" Grid.Row="0" FontSize="45"></TextBlock>
-            <TextBlock Text="" Grid.Column="1" Grid.Row="1" FontSize="45"></TextBlock>
-            <TextBlock Text="" Grid.Column="1" Grid.Row="2" FontSize="45"></TextBlock>
-            <TextBlock Text="" Grid.Column="1" Grid.Row="3" FontSize="45"></TextBlock>
-            <TextBlock Text="" Grid.Column="1" Grid.Row="4" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="CountryTxt" Grid.Column="1" Grid.Row="0" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="ConfirmedCasesTxt" Grid.Column="1" Grid.Row="1" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="RecoveredTxt" Grid.Column="1" Grid.Row="2" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="DeathTxt" Grid.Column="1" Grid.Row="3" FontSize="45"></TextBlock>
+            <TextBlock Text="" x:Name="ActiveCasesTxt" Grid.Column="1" Grid.Row="4" FontSize="45"></TextBlock>
 
         </Grid>
 

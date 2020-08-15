@@ -27,30 +27,46 @@ namespace FINAL_PROJECT_GROUP4
     {
         LiveCountryCovidStatus _fetchedCovidStatus;
         LiveCovidStatusFetcher _covidFetcher = new LiveCovidStatusFetcher() ;
+        public string countryName;
         public CovidStatusPage()
         {
             this.InitializeComponent();
-            _covidFetcher.Code = "IT";
- 
+            _covidFetcher.Code = "us";
+            _covidFetcher.FetchRawFromApi().ProcessFetch();
+            _fetchedCovidStatus = _covidFetcher.LiveCountryCovidStatusRepository;
+            SetDetails();
         }
         private void SetDetails()
         {
+            CountryTxt.Text = countryName??"";
+            ConfirmedCasesTxt.Text = _fetchedCovidStatus.TotalDailies[totals.confirmed].ToString();
+            RecoveredTxt.Text = _fetchedCovidStatus.TotalDailies[totals.recovered].ToString();
+            DeathTxt.Text = _fetchedCovidStatus.TotalDailies[totals.deaths].ToString();
+            ActiveCasesTxt.Text = _fetchedCovidStatus.TotalDailies[totals.actives].ToString();
+
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+        //    _covidFetcher.Code = ((object [])e.Parameter)[0].ToString() ;
+        //    countryName = ((object[])e.Parameter)[1].ToString();
+        //    _covidFetcher.FetchRawFromApi().ProcessFetch();
+        //    _fetchedCovidStatus = _covidFetcher.LiveCountryCovidStatusRepository;
 
         }
 
         private async void SaveOnClick(object sender, RoutedEventArgs e)
         {
-            if (_fetchedCovidStatus == null)
-            {
-                return;
-            }
-            FileSavePicker savePicker = new FileSavePicker();
-            savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
-            savePicker.FileTypeChoices.Add("Json", new List<String> { ".json" });
-            savePicker.SuggestedFileName = "SavedData.json";
-            StorageFile storageFile = await savePicker.PickSaveFileAsync();
+            //if (_fetchedCovidStatus == null)
+            //{
+            //    return;
+            //}
+            //FileSavePicker savePicker = new FileSavePicker();
+            //savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
+            //savePicker.FileTypeChoices.Add("Json", new List<String> { ".json" });
+            //savePicker.SuggestedFileName = "SavedData.json";
+            //StorageFile storageFile = await savePicker.PickSaveFileAsync();
 
-            JsonSaver.Save<LiveCountryCovidStatus>(await storageFile.OpenStreamForWriteAsync(), _fetchedCovidStatus);
+            //JsonSaver.Save<LiveCountryCovidStatus>(await storageFile.OpenStreamForWriteAsync(), _fetchedCovidStatus);
 
         }
 
