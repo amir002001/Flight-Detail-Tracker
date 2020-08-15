@@ -30,12 +30,11 @@
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="800"></ColumnDefinition>
-            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="1*" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="COVID-19 LIVE DAILY STATUS" Style="{StaticResource TitleStyle}" HorizontalAlignment="Left" Margin="462,37,0,0" Grid.ColumnSpan="2" Height="107" Width="1038" VerticalAlignment="Top" FontSize="70" RenderTransformOrigin="0.452,0.471" FontWeight="Bold"/>
-        <Grid Grid.Row="1" x:Name="Grid*" Margin="6,0,130,0" Grid.ColumnSpan="2">
+        <TextBlock Text="COVID-19 LIVE DAILY STATUS" Style="{StaticResource TitleStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Height="107" Width="1038" FontSize="70" RenderTransformOrigin="0.452,0.471" FontWeight="Bold"/>
+        <Grid Grid.Row="1" x:Name="DetailGrid" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" >
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -69,7 +68,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="1" x:Name="Grid" HorizontalAlignment="Left" Margin="280,0,0,0" Width="795">
+        <Grid Grid.Row="2" Grid.Column="1" x:Name="Grid" HorizontalAlignment="Center"  Width="795">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>

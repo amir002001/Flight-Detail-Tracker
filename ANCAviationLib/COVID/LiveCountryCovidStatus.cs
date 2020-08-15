@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Text.Json;
 
 namespace ANCAviationLib.COVID
 {
+    [DataContract]
     public class LiveCountryCovidStatus
     {
         private List<LiveRegionCovidStatus> _regions = new List<LiveRegionCovidStatus>();
         
+        [DataMember]
         public Dictionary<totals, int> TotalDailies
         {
             get

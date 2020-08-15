@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using ANCAviationLib.COVID;
+using Windows.Storage;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,19 +25,35 @@ namespace FINAL_PROJECT_GROUP4
     /// </summary>
     public sealed partial class CovidStatusPage : Page
     {
+        LiveCountryCovidStatus _fetchedCovidStatus;
+        LiveCovidStatusFetcher _covidFetcher = new LiveCovidStatusFetcher() ;
         public CovidStatusPage()
         {
             this.InitializeComponent();
+            _covidFetcher.Code = "IT";
+ 
         }
+        private void SetDetails()
+        {
+
+        }
+
+        private async void SaveOnClick(object sender, RoutedEventArgs e)
+        {
+            if (_fetchedCovidStatus == null)
+            {
+                return;
+            }
+            FileSavePicker savePicker = new FileSavePicker();
+            savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
+            savePicker.FileTypeChoices.Add("Json", new List<String> { ".json" });
+            savePicker.SuggestedFileName = "SavedData.json";
+            StorageFile storageFile = await savePicker.PickSaveFileAsync();
+
+            JsonSaver.Save<LiveCountryCovidStatus>(await storageFile.OpenStreamForWriteAsync(), _fetchedCovidStatus);
+
+        }
+
     }
-   // private async void SaveOnClick(object sender, RoutedEventArgs e)
-   //    {
-           // FileSavePicker savePicker = new FileSavePicker();
-//           savePicker.SuggestedStartLocation = PickerLocationId.Desktop;
-//           savePicker.FileTypeChoices.Add("Json", new List<String> { ".json" });
-//           savePicker.SuggestedFileName = "SavedFlight.json";
-//           StorageFile storageFile = await savePicker.PickSaveFileAsync();
-//
-//         JsonSaver.Save<FlightDetails>(await storageFile.OpenStreamForWriteAsync(), _selectedFlight);
-     //  }
+
 }
