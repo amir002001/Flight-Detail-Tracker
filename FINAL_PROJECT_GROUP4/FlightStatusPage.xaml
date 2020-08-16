@@ -147,7 +147,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource IndentedStyle}" Text="Scheduled Time:"></TextBlock>
-                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBLockDptTimeDetails"></TextBlock>
+                    <TextBlock Style="{StaticResource IndentedStyle}" x:Name="TxtBlockDptTimeDetails"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Style="{StaticResource TextBlockStyle}" Text="Arrival Details:" FontWeight="SemiBold"></TextBlock>
@@ -179,8 +179,8 @@
             <Button Content="Search" Style="{StaticResource ButtonStyle}" Click="SearchOnClick"></Button>
             <Button Content="Clear" Grid.Column="1" Style="{StaticResource ButtonStyle}" Click="ClearOnClick"></Button>
         </Grid>
-
-        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="RightButtonsGrid" HorizontalAlignment="Right">
+        <TextBlock x:Name="TxtErr" Grid.Row="2" Grid.Column="1" Foreground="Red" FontSize="16" TextWrapping="Wrap" VerticalAlignment="Center"></TextBlock>
+        <Grid Grid.Row="2" Grid.Column="2" x:Name="RightButtonsGrid" HorizontalAlignment="Right">
             <Grid.Resources>
                 <Style TargetType="RadioButton">
                     <Setter Property="FontSize" Value="15"></Setter>
