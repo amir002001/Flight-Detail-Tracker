@@ -16,7 +16,7 @@ namespace ANCAviationLib.Flights
     /// <summary>
     /// A class that contacts the aviationstack api and retrieves a set of flights.
     /// </summary>
-    public class FlightFetcher : Fetcher<FlightFetcher>
+    public class FlightFetcher : IFetcher<FlightFetcher>
     {
         private Dictionary<string, string> _filters = new Dictionary<string, string>();
         private FlightDetailRepository _flightRepo = new FlightDetailRepository();

@@ -8,7 +8,8 @@ using System.Text.RegularExpressions;
 
 namespace ANCAviationLib.Weather
 {
-    public class WeatherStatusFetcher : Fetcher<WeatherStatusFetcher>
+    /*
+    public class WeatherStatusFetcher : IFetcher<WeatherStatusFetcher>
     {
  
         private string _today = DateTime.Today.ToString("yyyy-MM-dd");
@@ -81,10 +82,6 @@ namespace ANCAviationLib.Weather
 
         public WeatherStatusFetcher FetchRawFromApi => throw new NotImplementedException();
 
-        public WeatherStatusFetcher SaveFetch(Uri directory)
-        {
-            throw new NotImplementedException();
-        }
         private MatchCollection MatchFinder(string jsonString)
         {
             const string pattern = "\".ob+.]?";
@@ -99,10 +96,6 @@ namespace ANCAviationLib.Weather
             WeatherStatusRepository.Clear();
             return this;
         }
-
-        public WeatherStatusFetcher SaveFetch(Uri Directory)
-        {
-            throw new NotImplementedException();
-        }
     }
+    */
 }

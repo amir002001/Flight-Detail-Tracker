@@ -90,8 +90,10 @@ namespace FINAL_PROJECT_GROUP4
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        ///  
         private void NavigateToWeatherOnClick(object sender, RoutedEventArgs e)
         {
+            /*
             if (_selectedFlight == null)
                 return;
             try
@@ -108,7 +110,9 @@ namespace FINAL_PROJECT_GROUP4
                 TxtErr.Text = $"{ex.Message}{Environment.NewLine}{ex.InnerException?.Message}";
             }
             catch (Exception ex) { TxtErr.Text = ex.Message; }
+            */
         }
+
         /// <summary>
         /// Navigates to Covid page with a country iso code.
         /// </summary>

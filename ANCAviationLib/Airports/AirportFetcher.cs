@@ -10,7 +10,7 @@ namespace ANCAviationLib.Airports
     /// <summary>
     /// An aiport fetcher class that contacts the airport API.
     /// </summary>
-    public class AirportFetcher : Fetcher<AirportFetcher>
+    public class AirportFetcher : IFetcher<AirportFetcher>
     {
         private string _code;
         private string _lastFetchRaw;

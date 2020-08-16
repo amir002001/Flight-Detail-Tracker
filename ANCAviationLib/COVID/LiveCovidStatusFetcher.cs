@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 namespace ANCAviationLib.COVID
 {
     
-    public class LiveCovidStatusFetcher : Fetcher<LiveCovidStatusFetcher>
+    public class LiveCovidStatusFetcher : IFetcher<LiveCovidStatusFetcher>
     {
         private string _today = DateTime.Today.ToString("yyyy-MM-dd");
         private string _code = "";
@@ -104,11 +104,6 @@ namespace ANCAviationLib.COVID
         {
             _liveCountryCovidStatusRepository.Clear();
             return this;
-        }
-
-        public LiveCovidStatusFetcher SaveFetch(Uri Directory)
-        {
-            throw new NotImplementedException();
         }
     }
 }

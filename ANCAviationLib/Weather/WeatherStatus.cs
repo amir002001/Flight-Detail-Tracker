@@ -6,6 +6,7 @@ using System.Text.Json;
 
 namespace ANCAviationLib.Weather
 {
+    /*
     public class WeatherStatus
     {
         public int TempC { get; set; }
@@ -22,4 +23,5 @@ namespace ANCAviationLib.Weather
             _data.Clear();
         }
     } 
+    */
 }

@@ -23,6 +23,7 @@ namespace FINAL_PROJECT_GROUP4
     /// </summary>
     public sealed partial class WeatherStatusPage : Page
     {
+        /*
         private WeatherStatusFetcher _weatherFeature = new WeatherStatusFetcher();
         public int TempC { get; set; }
         public int TemoF { get; set; }
@@ -32,17 +33,17 @@ namespace FINAL_PROJECT_GROUP4
         public int Sunrise { get; set; }
         public int Sunset { get; set; }
         public int Pressure { get; set; }
-
+        */
         public WeatherStatusPage()
         {
             this.InitializeComponent();
         }
-
+        /*
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             object FlightFetcher = base.OnNavigatedFrom(e);
         }
-
+        */
         private void Clear_Button(object sender, RoutedEventArgs e)
         {
             TempC.Text = "";
