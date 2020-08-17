@@ -196,10 +196,6 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <RadioButton x:Name="DepartureButton" Content="Departure" GroupName="Radios" IsChecked="True"></RadioButton>
-            <RadioButton x:Name="ArrivalButton" Grid.Row="1" Content="Arrival" GroupName="Radios"></RadioButton>
-            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Content="Weather Status" MinWidth="187" HorizontalAlignment="Left" Click="NavigateToWeatherOnClick"></Button>
-            <Button Style="{StaticResource ButtonStyle}" Grid.Column="1" Grid.Row="1" Content="COVID-19 Status" MinWidth="204" HorizontalAlignment="Left" Click="NavigateToCovidOnClick"></Button>
             <Button Style="{StaticResource ButtonStyle}" Grid.RowSpan="2" Grid.Column="2" Content="Save Flight" MinWidth="140" HorizontalAlignment="Left" Click="SaveOnClick"></Button>
         </Grid>
     </Grid>

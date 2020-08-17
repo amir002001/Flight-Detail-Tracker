@@ -119,16 +119,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CovidStatusPage.xaml.cs">
-      <DependentUpon>CovidStatusPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="FlightStatusPage.xaml.cs">
       <DependentUpon>FlightStatusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeatherStatusPage.xaml.cs">
-      <DependentUpon>WeatherStatusPage.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -136,7 +130,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\WeatherForecast.png" />
     <Content Include="Assets\Flags\ad.png" />
     <Content Include="Assets\Flags\ae.png" />
     <Content Include="Assets\Flags\af.png" />
@@ -394,15 +387,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CovidStatusPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="FlightStatusPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WeatherStatusPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

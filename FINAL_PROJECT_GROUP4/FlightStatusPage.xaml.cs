@@ -86,57 +86,6 @@ namespace FINAL_PROJECT_GROUP4
             TxtBoxAirlineIata.Text = "";
         }
         /// <summary>
-        /// Navigates to WeatherStatusPage with a lat and long double array.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        ///  
-        private void NavigateToWeatherOnClick(object sender, RoutedEventArgs e)
-        {
-            /*
-            if (_selectedFlight == null)
-                return;
-            try
-            {
-                _airportFetcher.Code = ((bool)DepartureButton.IsChecked) ? _selectedFlight.Departure.Iata : _selectedFlight.Arrival.Iata;
-                _airportFetcher.FetchRawFromApi().ProcessFetch();
-                var lon = _airportFetcher.FetchedAirport.Longitude;
-                var lat = _airportFetcher.FetchedAirport.Latitude;
-                Frame.Navigate(typeof(WeatherStatusPage), new double[] { lat, lon });
-                TxtErr.Text = "";
-            }
-            catch (WebException ex)
-            {
-                TxtErr.Text = $"{ex.Message}{Environment.NewLine}{ex.InnerException?.Message}";
-            }
-            catch (Exception ex) { TxtErr.Text = ex.Message; }
-            */
-        }
-
-        /// <summary>
-        /// Navigates to Covid page with a country iso code.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void NavigateToCovidOnClick(object sender, RoutedEventArgs e)
-        {
-            if (_selectedFlight == null)
-                return;
-            try
-            {
-                _airportFetcher.Code = ((bool)DepartureButton.IsChecked) ? _selectedFlight.Departure.Iata : _selectedFlight.Arrival.Iata;
-                _airportFetcher.FetchRawFromApi().ProcessFetch();
-                Frame.Navigate(typeof(CovidStatusPage), _airportFetcher.FetchedAirport.Country_Iso);
-                TxtErr.Text = "";
-            }
-            catch (WebException ex)
-            {
-                TxtErr.Text = $"{ex.Message}{Environment.NewLine}{ex.InnerException?.Message}";
-            }
-            catch (Exception ex) { TxtErr.Text = ex.Message; }
-
-        }
-        /// <summary>
         /// Saves the selected flight using Data Contract Serializier.
         /// </summary>
         /// <param name="sender"></param>
