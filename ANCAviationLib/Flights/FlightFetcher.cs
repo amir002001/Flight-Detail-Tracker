@@ -1,5 +1,4 @@
-﻿using ANCAviationLib.COVID;
-using ANCAviationLib.DataAccessLayer;
+﻿using ANCAviationLib.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
